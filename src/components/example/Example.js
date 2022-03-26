@@ -69,7 +69,7 @@ export class Counter extends React.Component {
     componentDidMount() {
         //компонент смонтирован
         console.log('mounted');
-        setInterval(() => {
+        this.interval = setInterval(() => {
             this.setState(prevState => ({
                 count: prevState.count + 1
             }));
@@ -78,6 +78,7 @@ export class Counter extends React.Component {
     }
 
     componentWillUnmount() {
+        clearInterval(this.interval);
         //не получится увидеть 
         console.log('unmounted');
     }
