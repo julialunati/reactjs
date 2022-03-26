@@ -13,10 +13,19 @@ import React from 'react';
 // }
 
 export class Counter extends React.Component {
-    state = {
-        count: 0,
-        name: 'Jane'
-    };
+    // state = {
+    //     count: 0,
+    //     name: 'Jane'
+    // };
+
+    constructor(props){
+        super(props);
+        //равносильно записи выше 
+        this.state = {
+            count: 0,
+            name: 'Jane'
+        };
+    }
 
     increase = () =>{
         // если при подсчете нового значения ипспользуется используется текущий state
