@@ -14,27 +14,28 @@ import React from 'react';
 
 export class Child extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         //равносильно записи выше 
         console.log('child\'s constructor');
         this.state = {
             count: 0,
-            name: 'Jane'
+            name: 'Jane',
+            showChild: false,
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         //компонент смонтирован
         console.log('child is mounted');
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         //не получится увидеть 
         console.log('child is unmounted');
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
         console.log('child is updated', prevProps, prevState);
     }
 
@@ -55,7 +56,7 @@ export class Counter extends React.Component {
     //     name: 'Jane'
     // };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         //равносильно записи выше 
         console.log('constructor');
@@ -65,39 +66,39 @@ export class Counter extends React.Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         //компонент смонтирован
         console.log('mounted');
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         //не получится увидеть 
         console.log('unmounted');
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
         console.log('updated', prevProps, prevState);
     }
 
-    increase = () =>{
+    increase = () => {
         // если при подсчете нового значения ипспользуется используется текущий state
         //то для корректного вычисления важно использовать oldState
-        this.setState((oldState) => ({count: oldState.count  + 1}), ()=> {
+        this.setState((oldState) => ({ count: oldState.count + 1 }), () => {
             console.log('2nd arg', this.state.count);
         });
-    } 
+    }
 
-    decrease = () =>{
-        this.setState((oldState) => ({count: oldState.count - 1}), ()=> {
+    decrease = () => {
+        this.setState((oldState) => ({ count: oldState.count - 1 }), () => {
             console.log('2nd arg', this.state.count);
         });
-    } 
+    }
     render() {
         console.log('render');
         return (
             <div><h4>{this.state.count}</h4>
                 <button onClick={this.increase}>Click</button>
-                <Child/>
+                {this.state.showChild && <Child />}
             </div>
         );
     }
