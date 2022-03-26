@@ -22,14 +22,26 @@ function App() {
   }
   const foo = () => (alert('Hello'));
 
+
+  const [messages, setMessages] = useState(msgs);
+  const addMessage = () =>  {
+    setMessages([...messages, {text: 'new message', author: 'new author'}]);
+  }
+
   return (
+    //если надо вернуть два элемента 
+    <>
     <div className="App">
       <Counter randomNumber={rand} />
       <button onClick={updateRand}>Update random</button>
-      {msgs.map((msg) => <Message author={msg.author} text={msg.text} />)}
+      {/* {msgs.map((msg) => <Message author={msg.author} text={msg.text} />)} */}
+      {messages.map((msg) => <Message author={msg.author} text={msg.text} />)}
+      <button onClick={addMessage}>Add message</button>
       {/* <Message author={name} text='text1' />
       <Message author={name} text='text2' /> */}
     </div>
+    <div>2nd div</div>
+    </>
   );
 }
 
