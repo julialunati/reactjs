@@ -12,6 +12,43 @@ import React from 'react';
 //     );
 // }
 
+export class Child extends React.Component {
+
+    constructor(props){
+        super(props);
+        //равносильно записи выше 
+        console.log('child\'s constructor');
+        this.state = {
+            count: 0,
+            name: 'Jane'
+        };
+    }
+
+    componentDidMount(){
+        //компонент смонтирован
+        console.log('child is mounted');
+    }
+
+    componentWillUnmount(){
+        //не получится увидеть 
+        console.log('child is unmounted');
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        console.log('child is updated', prevProps, prevState);
+    }
+
+    render() {
+        console.log('child is rendered');
+        return (
+            <div>
+                <h4>Child component</h4>
+            </div>
+        );
+    }
+
+}
+
 export class Counter extends React.Component {
     // state = {
     //     count: 0,
@@ -21,10 +58,25 @@ export class Counter extends React.Component {
     constructor(props){
         super(props);
         //равносильно записи выше 
+        console.log('constructor');
         this.state = {
             count: 0,
             name: 'Jane'
         };
+    }
+
+    componentDidMount(){
+        //компонент смонтирован
+        console.log('mounted');
+    }
+
+    componentWillUnmount(){
+        //не получится увидеть 
+        console.log('unmounted');
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        console.log('updated', prevProps, prevState);
     }
 
     increase = () =>{
@@ -41,10 +93,11 @@ export class Counter extends React.Component {
         });
     } 
     render() {
-        // console.log(this.state.name);
+        console.log('render');
         return (
             <div><h4>{this.state.count}</h4>
                 <button onClick={this.increase}>Click</button>
+                <Child/>
             </div>
         );
     }
