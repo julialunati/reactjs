@@ -1,10 +1,15 @@
 import './Message.style.css';
 
-export const Message = ({name, age, italic}) => {
+export const Message = ({ author, text }) => {
     // деструктуризация объекта js (props) тоже самое что ({ name })
     // console.log(props);
-    return(<h3 className={'message' + (italic ? ' header' : '')}> I'm a message: {name}, {age}  </h3>);
-} 
+    return (
+        <div className='message'>
+            <span> {author}: </span>
+            <span> {text} </span>
+        </div>
+    );
+}
 
 // import React from 'react';
 
