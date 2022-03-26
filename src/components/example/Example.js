@@ -93,11 +93,16 @@ export class Counter extends React.Component {
             console.log('2nd arg', this.state.count);
         });
     }
+    toggleChild = () =>{
+        this.setState(prevState =>({
+            showChild: !prevState.showChild
+        }));
+    }
     render() {
         console.log('render');
         return (
             <div><h4>{this.state.count}</h4>
-                <button onClick={this.increase}>Click</button>
+                <button onClick={this.toggleChild}>Click</button>
                 {this.state.showChild && <Child />}
             </div>
         );
