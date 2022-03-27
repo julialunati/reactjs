@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { Message } from './components/message/Message'
+import { Message } from './components/message/Message';
 import { Counter } from './components/example/Example';
+import { Form } from './components/form/Form';
 import { useState } from 'react';
 
 const name = 'Julia';
@@ -24,8 +25,8 @@ function App() {
 
 
   const [messages, setMessages] = useState(msgs);
-  const addMessage = () =>  {
-    setMessages([...messages, {text: 'new message', author: 'new author'}]);
+  const addMessage = (newText) =>  {
+    setMessages([...messages, {text: newText, author: 'me'}]);
   }
 
   return (
@@ -39,6 +40,7 @@ function App() {
       <button onClick={addMessage}>Add message</button>
       {/* <Message author={name} text='text1' />
       <Message author={name} text='text2' /> */}
+      <Form onSubmit={addMessage}/>
     </div>
     <div>2nd div</div>
     </>
