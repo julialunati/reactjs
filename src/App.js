@@ -18,11 +18,9 @@ function App() {
   }
 
   useEffect(() => {
-    if (messages.length) {
-      if (messages[messages.length - 1].author === 'me') {
+      if (messages[messages.length - 1]?.author === 'me') {
         addAutoReply();
       }
-    } 
   }, [messages]);
 
   return (
