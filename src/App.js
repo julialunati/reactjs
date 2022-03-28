@@ -1,24 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import { Message } from './components/message/Message';
+import { Counter } from './components/example/Example';
+import { Form } from './components/form/Form';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [messages, setMessages] = useState([]);
+
+  const addMessage = (newText) => {
+    setMessages([...messages, { text: newText, author: 'me' }]);
+  }
+
+  const addAutoReply = () => {
+    setMessages([...messages, { text: 'auto-reply', author: 'robot' }]);
+  }
+
+  useEffect(() => {
+    if (messages.length) {
+      if (messages[messages.length - 1].author === 'me') {
+        addAutoReply();
+      }
+    } 
+  }, [messages]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <div>Messages</div>
+        <div className="main">
+          {messages.map((msg, i) => <Message author={msg.author} text={msg.text} key={i} />)}
+        </div>
+        <Form onSubmit={addMessage} />
+      </div>
+    </>
   );
 }
 

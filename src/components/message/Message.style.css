@@ -1,0 +1,13 @@
+html { font-family: 'PT Sans', Georgia, serif; }
+
+.message{
+    color:blue;
+}
+
+.message:nth-child(odd){
+    background-color:rgb(231, 231, 231)
+}
+
+.header{
+    font-style: italic;
+}
