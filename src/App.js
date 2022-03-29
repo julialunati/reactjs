@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { AUTHORS } from './utils/constants';
 import { MessageList } from './components/messageList/MesssageList';
 
-const human = 'me';
+// const human = 'me';
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
 
   const sendMessage = (text) => {
     addMessage({
-      author: human,
+      author: AUTHORS.human,
       text,
       id: `msg-${Date.now()}`
     })
@@ -28,9 +28,9 @@ function App() {
 
   useEffect(() => {
     let timeout;
-    if (messages[messages.length - 1]?.author === human) {
+    if (messages[messages.length - 1]?.author === AUTHORS.human) {
       timeout = setTimeout(() => {
-        addMessage({ author: 'robot', text: 'auto-reply' });
+        addMessage({ author: AUTHORS.bot, text: 'auto-reply', id: `msg-robot-${Date.now()}`});
       }, 2000);
     }
 
