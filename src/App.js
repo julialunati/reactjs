@@ -3,16 +3,38 @@ import './App.css';
 import { Message } from './components/message/Message';
 import { Counter } from './components/example/Example';
 import { Form } from './components/form/Form';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { AUTHORS } from './utils/constants';
 import { MessageList } from './components/messageList/MesssageList';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
-// const human = 'me';
+
+const msgs = [
+  {
+    id: '1',
+    sender: 'jhon',
+    text: 'hello'
+  },
+  {
+    id: '2',
+    sender: 'kate',
+    text: 'ciao'
+  },
+  {
+    id: '3',
+    sender: 'sam',
+    text: 'buongiorno'
+  }
+];
 
 function App() {
 
   const [messages, setMessages] = useState([]);
-  const [flag, setFlag] = useState(false);
+  const [arrMsg, setArrMsg] = useState(msgs);
+
+  const timeout = useRef();
 
   const sendMessage = (text) => {
     addMessage({
@@ -27,15 +49,14 @@ function App() {
   }
 
   useEffect(() => {
-    let timeout;
     if (messages[messages.length - 1]?.author === AUTHORS.human) {
-      timeout = setTimeout(() => {
-        addMessage({ author: AUTHORS.bot, text: 'auto-reply', id: `msg-robot-${Date.now()}`});
+      timeout.current = setTimeout(() => {
+        addMessage({ author: AUTHORS.bot, text: 'auto-reply', id: `msg-robot-${Date.now()}` });
       }, 2000);
     }
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeout.current);
     }
   }, [messages]);
 
@@ -51,14 +72,17 @@ function App() {
   return (
     <>
       <div className="App">
-        <div>Messages</div>
-        <MessageList messages={messages} />
-        {
-          flag ? (<div><Form onSubmit={sendMessage}/></div>) : (<section><Form onSubmit={sendMessage}/></section>)
-        }
-
-        <Form onSubmit={sendMessage} />
-        <button onClick={()=> setFlag(!flag)}>click</button>
+        <div>
+          <List>
+            {arrMsg.map((msg) => <ListItem key={msg.id}><ListItemText primary={msg.sender} secondary={msg.text} /></ListItem>)}
+          </List>
+        </div>
+        <div>
+          <span>Messages</span>
+          <MessageList messages={messages} />
+          <Form onSubmit={sendMessage} />
+          {/* <button onClick={handleScroll}>scroll</button> */}
+        </div>
       </div>
     </>
   );
