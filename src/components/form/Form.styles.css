@@ -1,0 +1,8 @@
+.mybtn{
+    background-color: grey;
+}
+
+.MuiButton-root.MuiButton-containedPrimary{
+    /* this style will work */
+    background-color: violet;
+}
