@@ -1,7 +1,7 @@
 // import React from 'react';
 import { useEffect, useState } from 'react';
 
-export const Counter = ({randomNumber}) => {
+export const Counter = ({ randomNumber }) => {
     // передача изначального состояния 
     const [count, setCount] = useState(11);
 
@@ -11,7 +11,7 @@ export const Counter = ({randomNumber}) => {
 
     useEffect(() => {
         console.log('like mounted and updated');
-        return() => {
+        return () => {
             console.log('unmounted no dependecies');
         };
     });
@@ -26,13 +26,13 @@ export const Counter = ({randomNumber}) => {
 
     useEffect(() => {
         console.log('like mounted + count or randomNumber updated');
-        return() => {
+        return () => {
             console.log('unmounted [count, randomNumber]');
         };
     }, [count, randomNumber]);
 
     useEffect(() => {
-        return() => {
+        return () => {
             console.log('unmounted');
         };
     }, []);
@@ -43,7 +43,7 @@ export const Counter = ({randomNumber}) => {
             <h4>{count}</h4>
             {/* изменение переменной при функциональном подходе */}
             <button onClick={() => setCount((prevCount) => prevCount + 1)}>Click</button>
-            <h6>{randomNumber}</h6> 
+            <h6>{randomNumber}</h6>
         </div>
     );
 }
@@ -111,7 +111,7 @@ export const Counter = ({randomNumber}) => {
 //                 count: prevState.count + 1
 //             }));
 //         }, 1000);
- 
+
 //     }
 
 //     componentWillUnmount() {
@@ -152,3 +152,8 @@ export const Counter = ({randomNumber}) => {
 //         );
 //     }
 // }
+
+export const MyButton = ({ text, onClick, children }) => {
+    console.log(children);
+    return (<div role="button" onClick={onClick}>{children}</div>);
+}
