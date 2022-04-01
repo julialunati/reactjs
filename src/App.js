@@ -90,9 +90,12 @@ function App() {
                 <span style={{color: "red"}}></span>
             </MyButton>
       </div>
-
+{/* 
       <ExampleForm onSubmit={() => {console.log('submitted')}}>{({ value, handleChange }) => <TextField value={value} onChange={handleChange} />}</ExampleForm>
-      <ExampleForm onSubmit={() => {console.log('another action')}}>{({ value, handleChange }) => <input value={value} onChange={handleChange} />}</ExampleForm>
+      <ExampleForm onSubmit={() => {console.log('another action')}}>{({ value, handleChange }) => <input value={value} onChange={handleChange} />}</ExampleForm> */}
+       {/* render prop has the same logic as a children, only a little bit diff in passing data and the name render is not reservated and can be used any other */}
+      <ExampleForm onSubmit={() => {console.log('submitted')}} render={({ value, handleChange }) => <TextField value={value} onChange={handleChange} />}></ExampleForm>
+      <ExampleForm onSubmit={() => {console.log('another action')}} render={({ value, handleChange }) => <input value={value} onChange={handleChange} />}></ExampleForm>
     </>
   );
 }

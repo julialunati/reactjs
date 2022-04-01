@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import '../form/Form.styles.css';
 import { MyButton } from '../example/Example';
 
-export const ExampleForm = ({ onSubmit, children }) => {
+export const ExampleForm = ({ onSubmit, render }) => {
     const [value, setValue] = useState('');
 
     const inputRef = useRef();
@@ -33,7 +33,7 @@ export const ExampleForm = ({ onSubmit, children }) => {
     return (
         <form onSubmit={handleSubmit}>
 
-            {children({value, handleChange})}
+            {render({value, handleChange})}
         </form>
     );
 }
