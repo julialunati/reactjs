@@ -10,6 +10,8 @@ import { MessageList } from './components/messageList/MesssageList';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import { ExampleForm } from './components/example/ExampleForm';
+import { TextField } from '@mui/material';
 
 
 const msgs = [
@@ -88,6 +90,9 @@ function App() {
                 <span style={{color: "red"}}></span>
             </MyButton>
       </div>
+
+      <ExampleForm onSubmit={() => {console.log('submitted')}}>{({ value, handleChange }) => <TextField value={value} onChange={handleChange} />}</ExampleForm>
+      <ExampleForm onSubmit={() => {console.log('another action')}}>{({ value, handleChange }) => <input value={value} onChange={handleChange} />}</ExampleForm>
     </>
   );
 }
