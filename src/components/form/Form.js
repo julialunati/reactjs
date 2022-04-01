@@ -1,7 +1,9 @@
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
+import { fontWeight } from "@mui/system";
 import { useEffect, useState, useRef } from "react";
 import './Form.styles.css';
+import { MyButton } from '../example/Example';
 
 export const Form = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -22,7 +24,7 @@ export const Form = ({ onSubmit }) => {
     useEffect(() => {
         console.log('like mounted', inputRef);
         inputRef.current?.focus();
-        
+
         return () => {
           console.log('unmounted');
         }
@@ -39,6 +41,10 @@ export const Form = ({ onSubmit }) => {
             <input value={value} onChange={handleChange} autoFocus={true} ref={inputRef}/> 
             {/* syles of mybtn wont't work  */}
             <Button className="mybtn" sx={{color: "red"}} type="submit" variant="contained">submit</Button>
+
+            <MyButton text="Submit" onClick={{handleSubmit}}>
+                <span style={{color: "red"}}>Children styles - between tag MyButton</span>
+            </MyButton>
         </form>
     );
 }

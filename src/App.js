@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Message } from './components/message/Message';
 import { Counter } from './components/example/Example';
+import { MyButton } from './components/example/Example';
 import { Form } from './components/form/Form';
 import { useEffect, useState, useRef } from 'react';
 import { AUTHORS } from './utils/constants';
@@ -83,6 +84,9 @@ function App() {
           <Form onSubmit={sendMessage} />
           {/* <button onClick={handleScroll}>scroll</button> */}
         </div>
+        <MyButton text="otherBtn" onClick={() => {}}>
+                <span style={{color: "red"}}></span>
+            </MyButton>
       </div>
     </>
   );
