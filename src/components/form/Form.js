@@ -36,15 +36,8 @@ export const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* <input value={value} onChange={handleChange} type="text" />  
-            <input type="submit" /> */}
             <input value={value} onChange={handleChange} autoFocus={true} ref={inputRef}/> 
-            {/* syles of mybtn wont't work  */}
-            <Button className="mybtn" sx={{color: "red"}} type="submit" variant="contained">submit</Button>
-
-            <MyButton text="Submit" onClick={{handleSubmit}}>
-                <span style={{color: "red"}}>Children styles - between tag MyButton</span>
-            </MyButton>
+            <Button className="mybtn" type="submit" variant="contained">submit</Button>
         </form>
     );
 }
