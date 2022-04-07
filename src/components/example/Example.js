@@ -153,7 +153,11 @@ export const Counter = ({ randomNumber }) => {
 //     }
 // }
 
-export const MyButton = ({ text, onClick, children }) => {
+export const MyButton = ({ onClick, children }) => {
     console.log(children);
     return (<div role="button" onClick={onClick}>{children}</div>);
+}
+
+export const OtherButton = ({ onClick }) => {
+    return (<div role="button" onClick={onClick}>click</div>);
 }

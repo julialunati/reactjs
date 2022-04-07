@@ -1,9 +1,16 @@
+import { ThemeContext } from '../../utils/ThemeContext';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './Message.style.css';
 
 export const Message = ({ author, text }) => {
     // деструктуризация объекта js (props) тоже самое что ({ name })
     // console.log(props);
+
+    const theme = useContext(ThemeContext); // result in console {theme: 'dark', changeTheme: ƒ}
+    // const { theme } = useContext(ThemeContext); // result in console dark i.e destructuring assignment)
+
+    console.log(theme);
 
     return (
         <div className='message'>
