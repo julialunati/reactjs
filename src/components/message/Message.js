@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './Message.style.css';
 
-export const Message = ({ author, text }) => {
+export const Message = ({ author, text, color= "red" }) => {
     // деструктуризация объекта js (props) тоже самое что ({ name })
     // console.log(props);
 
@@ -14,16 +14,22 @@ export const Message = ({ author, text }) => {
 
     return (
         <div className='message'>
-            <span> {author}: </span>
+            <span style={{ color }}> {author}: </span>
             <span> {text} </span>
         </div>
     );
 }
 
-Message.propTypes = {
-    author: PropTypes.string.isRequired,
-    text: PropTypes.string,
+// Message.propTypes = {
+//     author: PropTypes.string.isRequired,
+//     text: PropTypes.string,
+// }
+
+const withGreenColor = (Component) => (props) => {
+    return<Component {...props} color="green" />
 }
+
+export const MessageWithGreenColor = withGreenColor(Message);
 
 // import React from 'react';
 
