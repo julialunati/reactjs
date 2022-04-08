@@ -3,33 +3,35 @@ import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import './Message.style.css';
 
-export const Message = ({ author, text, color= "red" }) => {
+export const Message = ({ author, text, theme }) => {
     // деструктуризация объекта js (props) тоже самое что ({ name })
     // console.log(props);
 
-    const theme = useContext(ThemeContext); // result in console {theme: 'dark', changeTheme: ƒ}
+    // const theme = useContext(ThemeContext); // result in console {theme: 'dark', changeTheme: ƒ}
     // const { theme } = useContext(ThemeContext); // result in console dark i.e destructuring assignment)
 
     console.log(theme);
 
     return (
         <div className='message'>
-            <span style={{ color }}> {author}: </span>
+            <span style={{ color: theme === 'dark' ? 'red' : 'blue' }}> {author}: </span>
             <span> {text} </span>
         </div>
     );
 }
 
-// Message.propTypes = {
-//     author: PropTypes.string.isRequired,
-//     text: PropTypes.string,
-// }
-
-const withGreenColor = (Component) => (props) => {
-    return<Component {...props} color="green" />
+Message.propTypes = {
+    author: PropTypes.string.isRequired,
+    text: PropTypes.string,
 }
 
-export const MessageWithGreenColor = withGreenColor(Message);
+const withThemeContext = (Component) => (props) => {
+    const { theme } = useContext(ThemeContext);
+
+    return <Component {...props} theme={ theme } />
+}
+
+export const MessageWithGreenColor = withThemeContext(Message);
 
 // import React from 'react';
 
