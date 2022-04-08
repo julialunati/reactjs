@@ -161,3 +161,22 @@ export const MyButton = ({ onClick, children }) => {
 export const OtherButton = ({ onClick }) => {
     return (<div role="button" onClick={onClick}>click</div>);
 }
+
+
+//pattern dekorator
+
+const foo = (a,b) => `${a} + ${b}`;
+const baz = () =>  console.log('baz');
+
+function addLog(func){
+    return function(...args){
+        console.log('helloooooooooo');
+        return func(...args);
+    }
+}
+
+const fooWithLog = addLog(foo);
+const bazWithLog = addLog(baz);
+
+fooWithLog(1,2);
+bazWithLog();
