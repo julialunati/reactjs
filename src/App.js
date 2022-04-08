@@ -3,14 +3,16 @@ import { Chat } from './screens/chat/Chat';
 import { ChatList } from './components/chatList/ChatList';
 import { Home } from './screens/home/Home';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
-import { Profile } from './components/profile/Profile';
+import { Profile } from './screens/profile/Profile';
 import { MyButton } from './components/example/Example';
 import { useState } from 'react';
 import { ThemeContext } from './utils/ThemeContext';
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
 
-  //this element can be passed as prop to diff elements but probably will create a mess
+  // this element can be passed as prop to diff elements but probably will create a mess
   const [theme, setTheme] = useState('dark');
 
   const toggleTheme = () => {
@@ -22,7 +24,8 @@ function App() {
   }
 
   return (
-    //important to use this element hierarchically higher than other elements
+    <Provider store={store}>
+    {/* //important to use this element hierarchically higher than other elements */}
     <ThemeContext.Provider value={{ theme, changeTheme: toggleTheme }}>
       <BrowserRouter>
         {/* <MyButton onClick={() => setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'))} /> */}
@@ -47,6 +50,7 @@ function App() {
 
       </BrowserRouter>
     </ThemeContext.Provider>
+    </Provider>
   );
 }
 
