@@ -1,42 +1,34 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { useEffect, useState, useRef } from 'react';
-import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
-import { ThemeContext } from '../../utils/ThemeContext';
-import { useContext } from 'react';
-import { OtherButton } from "../example/Example";
+import { Link, Outlet } from 'react-router-dom';
+import { Form } from "../form/Form";
 
-const chats = [
-    {
-        id: '1',
-        name: 'chat 1'
-    },
-    {
-        id: '2',
-        name: 'chat 2'
-    },
-    {
-        id: '3',
-        name: 'chat3'
-    }
-];
+export const ChatList = ({ chats, addChat, deleteChat }) => {
+    const handleSubmit = (newChatName) => {
+        const newChat = {
+            name: newChatName,
+            id: `chat-${Date.now()}`,
+        };
 
-
-export const ChatList = () => {
-
-    const { changeTheme } = useContext(ThemeContext);
+        addChat(newChat);
+    };
 
     return (
-      
+
         <>
-          <OtherButton onClick={changeTheme}></OtherButton>
-            <List>
-                {chats.map((chat) => (<ListItem key={chat.id}><Link to={`/chat/${chat.id}`} key={chat.id}> {chat.name} </Link></ListItem>))}
-            </List>
-            {/* this component renders child routes which are passing from parent route
-            in this case it is Chat */}
-            <Outlet />
+            <div className="chat-list">
+                <List>
+                    {chats.map((chat) => (
+                        <ListItem key={chat.id}>
+                            <Link to={`/chat/${chat.id}`}>
+                                {chat.name}
+                            </Link>
+                            <span onClick={() => deleteChat(chat.id)}>delete</span>
+                        </ListItem>))}
+                </List>
+                <Form onSubmit={handleSubmit} />
+                <Outlet />
+            </div>
         </>
     )
 }
