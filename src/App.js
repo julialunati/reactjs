@@ -10,7 +10,9 @@ import { ThemeContext } from './utils/ThemeContext';
 import { store } from "./store";
 import { Provider, shallowEqual, useDispatch, useSelector } from "react-redux";
 import { addChat, deleteChat } from "./store/chat/actions";
+import { addMessage } from "./store/message/actions";
 import { selectChats } from "./store/chat/selectors";
+import { selectMessages } from './store/message/selectors';
 
 const initialChats = [
   {
@@ -37,8 +39,9 @@ function App() {
   const [theme, setTheme] = useState('dark');
 
   const chats = useSelector(selectChats, shallowEqual);
+  const messages = useSelector(selectMessages);
   const dispatch = useDispatch();
-  const [messages, setMessages] = useState(initMessages);
+  // const [messages, setMessages] = useState(initMessages);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
@@ -48,23 +51,24 @@ function App() {
     return isActive ? 'blue' : 'grey';
   }
 
-  const addMessage = (newMsg, id) => {
-    setMessages({ ...messages, [id]: [...messages[id], newMsg] });
+  const addNewMessage = (newMsg, id) => {
+    dispatch(addMessage(newMsg, id));
+    // setMessages({ ...messages, [id]: [...messages[id], newMsg] });
   };
 
   const addNewChat = (newChat) => {
     dispatch(addChat(newChat));
-    setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
+    // setMessages((prevMessages) => ({ ...prevMessages, [newChat.id]: [] }));
   };
 
   const removeChat = (id) => {
     dispatch(deleteChat(id));
-    setMessages((prevMessages) => {
-      const newMessages = { ...prevMessages };
-      delete newMessages[id];
+    // setMessages((prevMessages) => {
+    //   const newMessages = { ...prevMessages };
+    //   delete newMessages[id];
 
-      return newMessages;
-    });
+    //   return newMessages;
+    // });
   };
 
   return (
@@ -120,7 +124,7 @@ function App() {
           >
             <Route
               path=":id"
-              element={<Chat messages={messages} addMessage={addMessage} />}
+              element={<Chat messages={messages} addMessage={addNewMessage} />}
             />
           </Route>
           <Route path="*" element={<h4>404</h4>} />

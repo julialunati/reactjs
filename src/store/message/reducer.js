@@ -1,15 +1,21 @@
 import { ADD_MESSAGE } from "./actions";
+import { ADD_CHAT } from "../chat/actions";
 
-const initialState = [];
+const initialState = {};
 
-export const messageReducer = (state = initialState, { type, payload }) => {
+export const messagesReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_MESSAGE: {
-      return [...state, payload];
+      return {
+        ...state,
+        [payload.chatId]: [...state[payload.chatId], payload.newMsg],
+      };
     }
-    // case DELETE_MESSAGE: {
-    //   return state.filter(({ id }) => id !== payload);
-    // }
+    case ADD_CHAT: {
+      return {
+        ...state, [payload.id]: [],
+      };
+    }
     default:
       return state;
   }
